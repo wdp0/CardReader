@@ -201,6 +201,12 @@ void CCardReaderDlg::OnButtonRecharge()
 	unsigned int nRecharge = 0;
 	CString s = _T("");
 
+	if(!CDB::IsDBOK())
+	{
+		MessageBox("打开数据库文件失败！");
+		return;
+	}
+
 	UpdateData();
 	
 	sscanf(m_sRecharge, "%d", &nRecharge);
@@ -229,7 +235,10 @@ void CCardReaderDlg::OnButtonRecharge()
 	//写数据库
 	CString sRecord = _T("");
 	sRecord.Format("%u,%d", m_nCardNo, nRecharge);
-	CDB::Insert(sRecord);
+	if(1 != CDB::Insert(sRecord))
+	{
+		//卡已经写成功了,但写数据库失败
+	}
 
 	MessageBox("写卡成功!");
 
@@ -239,6 +248,11 @@ void CCardReaderDlg::OnButtonRecharge()
 void CCardReaderDlg::OnButtonClear() 
 {
 	//清空
+	if(!CDB::IsDBOK())
+	{
+		MessageBox("打开数据库文件失败！");
+		return;
+	}
 	m_bTimerPause = TRUE;
 	if(!m_reader.SetBalance(m_nCardNo, 0))
 	{
@@ -249,7 +263,10 @@ void CCardReaderDlg::OnButtonClear()
 	//写数据库
 	CString sRecord = _T("");
 	sRecord.Format("%u,0", m_nCardNo);
-	CDB::Insert(sRecord);
+	if(1 != CDB::Insert(sRecord))
+	{
+		//卡已经写成功了,但写数据库失败
+	}
 
 	MessageBox("写卡成功!");
 
