@@ -205,9 +205,9 @@ void CCardReaderDlg::OnButtonRecharge()
 	
 	sscanf(m_sRecharge, "%d", &nRecharge);
 	//检查
-	if(nRecharge == 0)
+	if(nRecharge <= 0)
 	{
-		MessageBox("输入的数字不能为0！");
+		MessageBox("输入的数字不正确！");
 		return;
 	}
 #define RECHARGE_MAX	(365UL * 24 * 60)	/*一年的分钟数*/
@@ -228,7 +228,7 @@ void CCardReaderDlg::OnButtonRecharge()
 
 	//写数据库
 	CString sRecord = _T("");
-	sRecord.Format("%d,%d", m_nCardNo, nRecharge);
+	sRecord.Format("%u,%d", m_nCardNo, nRecharge);
 	CDB::Insert(sRecord);
 
 	MessageBox("写卡成功!");
@@ -248,7 +248,7 @@ void CCardReaderDlg::OnButtonClear()
 	}
 	//写数据库
 	CString sRecord = _T("");
-	sRecord.Format("%d,0", m_nCardNo);
+	sRecord.Format("%u,0", m_nCardNo);
 	CDB::Insert(sRecord);
 
 	MessageBox("写卡成功!");
