@@ -51,3 +51,20 @@ int CDB::WriteDB(const char *s)
 	file.Close();
 	return 1;
 }
+
+BOOL CDB::IsDBOK(void)
+{
+	BOOL b;
+	CFile file;
+
+	b = file.Open(g_sDBFile, CFile::typeBinary | CFile::modeCreate
+		| CFile::modeNoTruncate | CFile::modeWrite
+		| CFile::shareDenyWrite);
+	if(!b)
+	{
+		return FALSE;
+	}
+
+	file.Close();
+	return TRUE;
+}

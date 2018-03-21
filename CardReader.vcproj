@@ -386,10 +386,6 @@
 			RelativePath=".\hcrf32.lib"
 			>
 		</File>
-		<File
-			RelativePath="ReadMe.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 		<Global

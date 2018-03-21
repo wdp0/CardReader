@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "CardReader.h"
 #include "CardReaderDlg.h"
+#include "DB.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -70,6 +71,12 @@ BOOL CCardReaderApp::InitInstance()
 
 	g_sDBFile = g_sEXEFilePath.Left(g_sEXEFilePath.ReverseFind('\\'));
 	g_sDBFile += "\\record.csv";
+
+	if(!CDB::IsDBOK())
+	{
+		MessageBox(NULL, "打开数据库文件失败！", NULL, MB_OK);
+		return FALSE;
+	}
 
 	CCardReaderDlg dlg;
 	m_pMainWnd = &dlg;

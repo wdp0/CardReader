@@ -12,6 +12,7 @@ class CDB : public CObject
 {
 public:
 	static int Insert(CString &s);
+	static BOOL IsDBOK(void);
 protected:
 
 private:
