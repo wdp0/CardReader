@@ -5,6 +5,7 @@
 #include "CardReader.h"
 #include "CardReaderDlg.h"
 #include "DB.h"
+#include "Log.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -130,6 +131,7 @@ BOOL CCardReaderDlg::OnInitDialog()
 
 	if(TRUE != m_reader.GetReader())
 	{
+		MessageBox("请先连接读卡器！");
 		PostQuitMessage(0);
 		return TRUE;
 	}
@@ -208,7 +210,7 @@ void CCardReaderDlg::OnButtonRecharge()
 		MessageBox("输入的数字不能为0！");
 		return;
 	}
-#define RECHARGE_MAX	(24UL * 365 * 60)	/*一年的分钟数*/
+#define RECHARGE_MAX	(365UL * 24 * 60)	/*一年的分钟数*/
 	if(nRecharge > RECHARGE_MAX)
 	{
 		s.Format("输入的数字太大！\r\n不能大于%d！", RECHARGE_MAX);
@@ -217,7 +219,6 @@ void CCardReaderDlg::OnButtonRecharge()
 	}
 
 	m_bTimerPause = TRUE;
-
 	if(!m_reader.SetBalance(m_nCardNo, m_nBalance + nRecharge))
 	{
 		MessageBox("写卡失败!");
@@ -239,7 +240,6 @@ void CCardReaderDlg::OnButtonClear()
 {
 	//清空
 	m_bTimerPause = TRUE;
-
 	if(!m_reader.SetBalance(m_nCardNo, 0))
 	{
 		MessageBox("写卡失败!");
@@ -265,7 +265,6 @@ void CCardReaderDlg::OnButtonChangePass()
 void CCardReaderDlg::OnTimer(UINT nIDEvent) 
 {
 	// TODO: Add your message handler code here and/or call default
-
 	if(m_bTimerPause)
 	{
 		return;
@@ -289,7 +288,7 @@ void CCardReaderDlg::OnTimer(UINT nIDEvent)
 	unsigned int nBalance = 0;
 	if(m_reader.GetBalance(&m_nCardNo, &m_nBalance))
 	{
-		m_sCardNo.Format("%d", m_nCardNo);
+		m_sCardNo.Format("%u", m_nCardNo);
 		m_sBalance.Format("%d", m_nBalance);
 	}
 	UpdateData(FALSE);

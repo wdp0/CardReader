@@ -392,5 +392,9 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="CardReader.rc"
+		/>
 	</Globals>
 </VisualStudioProject>

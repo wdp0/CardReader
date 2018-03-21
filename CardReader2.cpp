@@ -103,7 +103,7 @@ int CCardReader::GetBalance(unsigned long *pnCardNo, unsigned int *pnBalance)
 		return FALSE;
 	}
 	//读操作使用的密码
-	static const unsigned char KEY_FOR_READ[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+	static const unsigned char KEY_FOR_READ[] = {'G', 'A', 'U', 'T', 'O', '\0'};
 #define BLOCK_NUM		(4)
 
 	nRet = rf_authentication_key(m_hReader, 0, BLOCK_NUM, (unsigned char *)KEY_FOR_READ);
