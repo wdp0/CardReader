@@ -13,9 +13,9 @@ Class2=CCardReaderDlg
 Class3=CAboutDlg
 
 ResourceCount=5
-Resource1=IDD_DIALOG_LOGIN
+Resource1=IDD_CARDREADER_DIALOG
 Resource2=IDR_MAINFRAME
-Resource3=IDD_CARDREADER_DIALOG
+Resource3=IDD_DIALOG_LOGIN
 Resource4=IDD_ABOUTBOX
 Resource5=IDD_DIALOG_CHANGE_PASS
 

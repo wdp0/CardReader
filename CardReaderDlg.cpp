@@ -253,6 +253,12 @@ void CCardReaderDlg::OnButtonClear()
 		MessageBox("打开数据库文件失败！");
 		return;
 	}
+
+	if(MessageBox("确认需要重置吗？", NULL, MB_OKCANCEL) != IDOK)
+	{
+		return;
+	}
+
 	m_bTimerPause = TRUE;
 	if(!m_reader.SetBalance(m_nCardNo, 0))
 	{
